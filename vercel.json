@@ -4,20 +4,10 @@
       "maxDuration": 10
     },
     "api/check-medications.js": {
-      "maxDuration": 30
+      "maxDuration": 10
     },
     "api/send-reminders.js": {
-      "maxDuration": 30
+      "maxDuration": 10
     }
-  },
-  "crons": [
-    {
-      "path": "/api/send-reminders",
-      "schedule": "* * * * *"
-    },
-    {
-      "path": "/api/check-medications",
-      "schedule": "*/30 * * * *"
-    }
-  ]
+  }
 }
