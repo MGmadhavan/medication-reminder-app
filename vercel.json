@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "functions": {
+    "api/send-email.js": {
+      "maxDuration": 10
+    },
+    "api/check-medications.js": {
+      "maxDuration": 30
+    },
+    "api/send-reminders.js": {
+      "maxDuration": 30
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/send-reminders",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/check-medications",
+      "schedule": "*/30 * * * *"
+    }
+  ]
+}
