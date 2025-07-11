@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase'
+import { supabase, getRedirectURL, signUpWithRedirect } from '@/lib/supabase'
 
 interface AuthContextType {
   user: User | null
@@ -45,14 +45,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signUp = async (email: string, password: string, metadata?: any) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: metadata,
-
-      },
-    })
+    console.log('🔗 SignUp redirect URL:', getRedirectURL())
+    const { error } = await signUpWithRedirect(email, password, metadata)
     return { error }
   }
 
